@@ -3,6 +3,7 @@ package com.seda.tictactoegame_compose
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -34,7 +35,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import com.seda.tictactoegame_compose.ui.BoardCellValue
+import com.seda.tictactoegame_compose.ui.GameState
 import com.seda.tictactoegame_compose.ui.GameViewModel
+import com.seda.tictactoegame_compose.ui.VictoryType
 import com.seda.tictactoegame_compose.ui.theme.BlueCustom
 import com.seda.tictactoegame_compose.ui.theme.GrayBackground
 import com.seda.tictactoegame_compose.ui.theme.TicTacToeGameComposeTheme
@@ -114,6 +117,21 @@ fun GameScreen(
                  }
              }
             }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                AnimatedVisibility(
+                    visible = state.hasWon,
+                    enter = fadeIn(tween(2000))
+                ) {
+                    DrawVictoryLine(state = state)
+                }
+            }
         }
 
         Row(
@@ -138,11 +156,26 @@ fun GameScreen(
              }
             
          }
-        
-        
+
+  
     }
 }
-
+@Composable
+fun DrawVictoryLine(
+    state: GameState
+) {
+    when (state.victoryType) {
+        VictoryType.HORIZONTAL1 -> WinHorizantalLine()
+        VictoryType.HORIZONTAL2 -> WinHorizantalLine2()
+        VictoryType.HORIZONTAL3 -> WinHorizantalLine3()
+        VictoryType.VERTICAL1 -> WinVerticalLine()
+        VictoryType.VERTICAL2 -> WinVerticalLine1()
+        VictoryType.VERTICAL3 -> WinVerticalLine2()
+        VictoryType.DIAGONAL1 -> WinDiagonalLine1()
+        VictoryType.DIAGONAL2 -> WinDiagonalLine2()
+        VictoryType.NONE -> {}
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun Greeting() {
