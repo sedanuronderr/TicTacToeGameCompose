@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "66201260096",
+    "project_id": "tic-tac-toe-game-compose",
+    "storage_bucket": "tic-tac-toe-game-compose.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66201260096:android:60ba9771db46df3e1bcfa5",
+        "android_client_info": {
+          "package_name": "com.seda.tictactoegame_compose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66201260096-2asvlmuh5a40jn4u86fvs8eruv8lgju3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5qw2L45nRkx45zkSy2v_IPHKTsKFU9WU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66201260096-2asvlmuh5a40jn4u86fvs8eruv8lgju3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

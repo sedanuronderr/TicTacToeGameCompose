@@ -1,5 +1,6 @@
 package com.seda.tictactoegame_compose
 
+import android.content.Context
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
@@ -11,15 +12,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,19 +34,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.seda.tictactoegame_compose.ui.BoardCellValue
 import com.seda.tictactoegame_compose.ui.GameState
 import com.seda.tictactoegame_compose.ui.GameViewModel
 import com.seda.tictactoegame_compose.ui.VictoryType
+import com.seda.tictactoegame_compose.ui.theme.Aqua
 import com.seda.tictactoegame_compose.ui.theme.BlueCustom
 import com.seda.tictactoegame_compose.ui.theme.GrayBackground
+import com.seda.tictactoegame_compose.ui.theme.GreenishYellow
 import com.seda.tictactoegame_compose.ui.theme.TicTacToeGameComposeTheme
 import com.seda.tictactoegame_compose.ui.userActions
 
@@ -52,7 +67,7 @@ fun GameScreen(
     Column(modifier = Modifier
         .fillMaxSize()
         .background(GrayBackground)
-        .padding(30.dp),
+        .padding(20.dp,10.dp,20.dp,20.dp),
     verticalArrangement = Arrangement.SpaceEvenly,
     horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -60,9 +75,51 @@ fun GameScreen(
         Row(modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween) {
-           Text(text = "Player 'O':${state.playerCircleCount} ", fontSize = 16.sp)
-            Text(text = "Draw: ${state.drawCount} ", fontSize = 16.sp)
-            Text(text = "Player 'X':${state.playerCrossCount} ", fontSize = 16.sp)
+       Column() {
+           Box(modifier = Modifier
+               .size(109.dp, 40.dp)
+               .clip(RoundedCornerShape(20.dp))
+               .background(
+
+                   Aqua
+               )
+               ) {
+               Column(modifier = Modifier.padding(8.dp)) {
+                   Text(text = "Player 'O': ${state.playerCircleCount} ", fontSize = 16.sp)
+
+               }
+
+           }
+
+       }
+            Column() {
+                Box(modifier = Modifier
+                    .size(109.dp, 40.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(color = Color.LightGray)
+                ) {
+                    Column(modifier = Modifier.padding(20.dp,8.dp)) {
+                        Text(text = "Draw: ${state.drawCount} ", fontSize = 16.sp)
+
+                    }
+
+                }
+
+            }
+            Column() {
+                Box(modifier = Modifier
+                    .size(109.dp, 40.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(GreenishYellow)
+                ) {
+                    Column(modifier = Modifier.padding(8.dp)) {
+                        Text(text = "Player 'X': ${state.playerCrossCount} ", fontSize = 16.sp)
+
+                    }
+
+                }
+
+            }
 
         }
         Text(
@@ -156,6 +213,7 @@ fun GameScreen(
              }
             
          }
+        bannersAds(LocalContext.current)
 
   
     }
@@ -176,7 +234,33 @@ fun DrawVictoryLine(
         VictoryType.NONE -> {}
     }
 }
-@Preview(showBackground = true)
+
+@Composable
+fun bannersAds(context: Context) {
+    // on below line creating a variable for location.
+    // on below line creating a column for our maps.
+
+
+
+        // on below line adding admob banner ads.
+        AndroidView(
+            // on below line specifying width for ads.
+            modifier = Modifier.fillMaxWidth(),
+            factory = { context ->
+                // on below line specifying ad view.
+                AdView(context).apply {
+                    // on below line specifying ad size
+                    setAdSize(AdSize.BANNER)                    // on below line specifying ad unit id
+                    // currently added a test ad unit id.
+                    adUnitId = "ca-app-pub-9199482281864772/4388051856"
+                    // calling load ad to load our ad.
+                    loadAd(AdRequest.Builder().build())
+                }
+            }
+        )
+    }
+
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Greeting() {
     TicTacToeGameComposeTheme {
