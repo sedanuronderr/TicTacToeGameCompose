@@ -96,7 +96,7 @@ drawCircle(
 
 @Composable
 fun WinHorizantalLine(){
-    Canvas(modifier = Modifier.size(300.dp) ){
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp) ){
 drawLine(
     color = Color.Red,
     strokeWidth = 10f,
@@ -111,7 +111,7 @@ drawLine(
 
 @Composable
 fun WinHorizantalLine2(){
-    Canvas(modifier = Modifier.size(300.dp) ){
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp) ){
         drawLine(
             color = Color.Red,
             strokeWidth = 10f,
@@ -127,7 +127,7 @@ fun WinHorizantalLine2(){
 
 @Composable
 fun WinHorizantalLine3(){
-    Canvas(modifier = Modifier.size(300.dp) ){
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp) ){
         drawLine(
             color = Color.Red,
             strokeWidth = 10f,
@@ -141,7 +141,7 @@ fun WinHorizantalLine3(){
 }
 @Composable
 fun WinVerticalLine(){
-    Canvas(modifier = Modifier.size(300.dp) ){
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp) ){
         drawLine(
             color = Color.Red,
             strokeWidth = 10f,
@@ -156,7 +156,7 @@ fun WinVerticalLine(){
 
 @Composable
 fun WinVerticalLine1(){
-    Canvas(modifier = Modifier.size(300.dp) ){
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp) ){
         drawLine(
             color = Color.Red,
             strokeWidth = 10f,
@@ -170,7 +170,7 @@ fun WinVerticalLine1(){
 }
 @Composable
 fun WinVerticalLine2(){
-    Canvas(modifier = Modifier.size(300.dp) ){
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp) ){
         drawLine(
             color = Color.Red,
             strokeWidth = 10f,
@@ -185,7 +185,7 @@ fun WinVerticalLine2(){
 
 @Composable
 fun WinDiagonalLine1() {
-    Canvas(modifier = Modifier.size(300.dp)) {
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp)) {
         drawLine(
             color = Color.Red,
             strokeWidth = 10f,
@@ -198,7 +198,7 @@ fun WinDiagonalLine1() {
 
 @Composable
 fun WinDiagonalLine2() {
-    Canvas(modifier = Modifier.size(300.dp)) {
+    Canvas(modifier = Modifier.size(300.dp).padding(10.dp)) {
         drawLine(
             color = Color.Red,
             strokeWidth = 10f,
@@ -213,6 +213,7 @@ fun WinDiagonalLine2() {
 @Composable
 fun Component() {
     TicTacToeGameComposeTheme {
+        BoardBase()
       WinHorizantalLine()
         WinHorizantalLine2()
         WinHorizantalLine3()

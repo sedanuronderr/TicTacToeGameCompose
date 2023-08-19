@@ -29,6 +29,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,6 +45,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.ViewModel
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
@@ -67,7 +71,7 @@ fun GameScreen(
     Column(modifier = Modifier
         .fillMaxSize()
         .background(GrayBackground)
-        .padding(20.dp,10.dp,20.dp,20.dp),
+        .padding(30.dp),
     verticalArrangement = Arrangement.SpaceEvenly,
     horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -132,7 +136,7 @@ fun GameScreen(
 
         Box(
             modifier = Modifier
-                .fillMaxWidth()
+                .size(300.dp)
                 .aspectRatio(1f)
                 .shadow(elevation = 10.dp, shape = RoundedCornerShape(20.dp))
                 .clip(RoundedCornerShape(20.dp))
@@ -147,7 +151,7 @@ fun GameScreen(
                     .aspectRatio(1f),
                 columns =GridCells.Fixed(3)
             ){
-             viewModel.boardItems.forEach{ cellNo,boardCellValue->
+             viewModel.boardItems.forEach{ (cellNo, boardCellValue) ->
                  item {
                      Column(
                          modifier = Modifier
@@ -187,6 +191,7 @@ fun GameScreen(
                     enter = fadeIn(tween(2000))
                 ) {
                     DrawVictoryLine(state = state)
+                    Loader()
                 }
             }
         }
@@ -213,11 +218,21 @@ fun GameScreen(
              }
             
          }
-        bannersAds(LocalContext.current)
+       // bannersAds(LocalContext.current)
 
   
     }
 }
+
+@Composable
+fun Loader() {
+
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.animation))
+    LottieAnimation(composition)
+}
+
+
+
 @Composable
 fun DrawVictoryLine(
     state: GameState
